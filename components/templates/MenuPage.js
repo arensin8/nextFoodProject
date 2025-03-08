@@ -1,3 +1,4 @@
+import Card from "../modules/Card";
 import styles from "./MenuPage.module.css";
 
 const MenuPage = ({ data }) => {
@@ -6,7 +7,7 @@ const MenuPage = ({ data }) => {
       <h2>Menu</h2>
       <div className={styles.subContainer}>
         {data.map((food) => (
-          <p key={food.id}>{food.name}</p>
+          <Card key={food.id} food={food} />
         ))}
       </div>
     </div>
