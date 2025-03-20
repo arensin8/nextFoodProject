@@ -14,7 +14,7 @@ const FoodDetails = ({ data }) => {
 export default FoodDetails;
 
 export async function getStaticPaths() {
-  const res = await fetch("http://localhost:4000/data");
+  const res = await fetch(`${process.env.BASE_URL}/data`);
   const json = await res.json();
   const data = json.slice(0, 10); // most famous ones
 
@@ -32,7 +32,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context) {
   const { params } = context;
-  const res = await fetch(`http://localhost:4000/data/${params.id}`);
+  const res = await fetch(`${process.env.BASE_URL}/data/${params.id}`);
   const data = await res.json();
 
   if (!data.id) {
@@ -43,6 +43,6 @@ export async function getStaticProps(context) {
 
   return {
     props: { data },
-    revalidate: 1 * 60 * 60,
+    revalidate: +process.env.REVALIDATE,
   };
 }
